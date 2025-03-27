@@ -1,76 +1,75 @@
-              Waste Management Optimization Model
+# Waste Management Optimization Model
 
-Waste is generated in two centers: New York and New Jersey. It can then be transpoted to four possible transfer station depots: Bronx, Brooklyn, Queens, and Staten Island.
-It can also be sent directly to one of the six landfills: C1- C6.
-The constraints to be satisfied in this problem are related to the fact that (1) there are limits to the maximum volume of waste that can pass through each depot; (2) each generation center has a limit to the maximum waste it can generate; (3) each landfill has a known demand.
-There are also transportation costs associated with each possible route.
+## Introduction
 
-Below are the specifications for each of the constraints and the costs.
+Waste is generated in two centers: **New York** and **New Jersey**. It can then be transported to four possible transfer station depots: **Bronx**, **Brooklyn**, **Queens**, and **Staten Island**. Additionally, waste can be sent directly to one of the six landfills: **C1 - C6**.
 
-      Center	Waste (tons)
+The goal of this model is to determine how to satisfy the demands of the landfills while minimizing the transportation costs associated with shipping the waste across various routes.
 
-      NewYork	300,000
+### Problem Constraints
 
-      NewJersey	400,000
+There are several key constraints in the model:
 
-The waste can be shipped from a center to four depots, each with a maximum throughput.
+1. **Depot Throughput Limits**: There are limits to the maximum volume of waste that can pass through each depot.
+2. **Generation Center Waste Limits**: Each generation center has a limit to the maximum waste it can generate.
+3. **Landfill Demand**: Each landfill has a known demand that must be satisfied.
 
-      Depot	Throughput (tons)
+### Data Specifications
 
-      Bronx	140,000
+#### Waste Generation from Centers
 
-      Brooklyn	100,000
+| **Center**  | **Waste (tons)** |
+|-------------|------------------|
+| New York    | 300,000          |
+| New Jersey  | 400,000          |
 
-      Queens	200,000
+#### Depot Throughput Limits
 
-      StatenIsland	80,000
+| **Depot**       | **Throughput (tons)** |
+|-----------------|-----------------------|
+| Bronx           | 140,000               |
+| Brooklyn        | 100,000               |
+| Queens          | 200,000               |
+| Staten Island   | 80,000                |
 
-Our network has six landfills, each with a given maxiumum demand.
+#### Landfill Demand
 
-      Landfill	Demand (tons)
+| **Landfill**    | **Demand (tons)** |
+|-----------------|-------------------|
+| C1              | 100,000           |
+| C2              | 20,000            |
+| C3              | 80,000            |
+| C4              | 70,000            |
+| C5              | 120,000           |
+| C6              | 40,000            |
 
-      C1	100,000
+#### Transportation Costs
 
-      C2	20,000
+There are transportation costs associated with each possible route from center to depot to landfill, or directly from center to landfill. These costs are considered when solving the optimization problem.
 
-      C3	80,000
+## Solution
 
-      C4	70,000
+The optimal cost for transporting waste through this network is **$541,000**.
 
-      C5	120,000
+### Flow of Waste
 
-      C6	40,000
+The following table shows the flow of waste to optimize transportation costs:
 
-There are transportation costs for each possible route from center to depot to landfill, or from center to landfill directly. 
+| **From**        | **To**           | **Flow (tons)** |
+|-----------------|------------------|-----------------|
+| New York       | C1               | 100,000         |
+| New York       | C6               | 40,000          |
+| New Jersey     | Brooklyn         | 100,000         |
+| New Jersey     | Queens           | 110,000         |
+| New Jersey     | Staten Island    | 80,000          |
+| Brooklyn       | C2               | 20,000          |
+| Brooklyn       | C4               | 70,000          |
+| Brooklyn       | C5               | 10,000          |
+| Queens         | C5               | 110,000         |
+| Staten Island  | C3               | 80,000          |
 
-The question this model answers is: How to satisfy the demands of the end landfills while minimizing shipping costs.      
+### Conclusion
 
-        Solution
-
-Ultimately, the optimal cost of transporting waste through this network is $541,000. 
-
-The following table shows the flow of waste to optimize transportation costs: 
-
-       From	         To	        Flow
-       
-       NewYork	     C1	        100000.0
-       
-       NewYork	     C6	        40000.0
-       
-       NewJersey	   Brooklyn	  100000.0
-       
-       NewJersey	   Queens	    110000.0
-       
-       NewJersey	   StatenI	  80000.0
-       
-       Brooklyn	     C2	        20000.0
-       
-       Brooklyn	     C4	        70000.0
-       
-       Brooklyn	     C5	        10000.0
-       
-       Queens	       C5	        110000.0
-       
-       StatenI	     C3	        80000.0
+### This model successfully answers the question: **How to satisfy the demands of the end landfills while minimizing shipping costs?** The solution ensures that all constraints are met, and the optimal cost of transporting waste is $541,000.
 
                     
